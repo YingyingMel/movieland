@@ -3,9 +3,9 @@ import "./App.css"
 import SearchIcon from "./search.svg"
 import MovieCard from './MovieCard'
 
-//Here is your key: e3caa36b
 
-const API_URL = "http://www.omdbapi.com/?i=tt3896198&apikey=e3caa36b"
+
+const API_URL = `https://www.omdbapi.com/?i=tt3896198&apikey=${process.env.REACT_APP_ACCESS_KEY}`
 
 function App () {
   const [movies, setMovies] = useState([])
@@ -15,7 +15,7 @@ function App () {
     const res = await fetch(`${API_URL}&s=${title}`)
     const data = await res.json()
     console.log(data.Search)
-    setMovies(data.Search)
+    setMovies(data.Search ?? [])
   }
 
   useEffect(() => {
